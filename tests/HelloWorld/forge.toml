@@ -1,0 +1,7 @@
+[forge]
+min_version = 1.0
+
+[project]
+name = "HelloWorld"
+version = "1.0.0"
+standard = "20"
