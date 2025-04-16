@@ -1,5 +1,5 @@
 [forge]
-min_version = 1.0
+min_version = "1.0"
 
 [project]
 name = "HelloWorld"

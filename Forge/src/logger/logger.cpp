@@ -23,6 +23,36 @@ Logger& Logger::operator<<(const std::string_view& view){
     return *this;
 }
 
+Logger& Logger::operator<<(const char ch){
+    std::cout << ch;
+    return *this;
+}
+
+Logger& Logger::operator<<(const long num){
+    std::cout << num;
+    return *this;
+}
+
+Logger& Logger::operator<<(const unsigned long num){
+    std::cout << num;
+    return *this;
+}
+
+Logger& Logger::operator<<(const long long num){
+    std::cout << num;
+    return *this;
+}
+
+Logger& Logger::operator<<(const unsigned long long num){
+    std::cout << num;
+    return *this;
+}
+
+Logger& Logger::operator<<(const double num){
+    std::cout << num;
+    return *this;
+}
+
 
 Logger DEBUG(){
     return Logger(DEBUG_COLOR);
