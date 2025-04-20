@@ -118,7 +118,7 @@ namespace Parse::Config {
             return;
         }
         
-        add_token(SECTION, value, line);
+        add_token(STRING, value, line);
     }
 
     auto Scanner::number() -> void {
