@@ -5,5 +5,5 @@ namespace Models {
     struct Config {
         Forge forge;
         Project project;
-    }
+    };
 }
