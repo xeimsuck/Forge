@@ -47,7 +47,6 @@ int Forge::run(int argc, char** argv){
     INFO() << "Parsing is finished successfully";
 
 
-
     DEBUG() << "End Forge::run";
     return 0;
 }

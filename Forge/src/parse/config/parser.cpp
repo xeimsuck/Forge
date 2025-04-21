@@ -1,4 +1,7 @@
 #include "parser.hpp"
+#include "logger/logger.hpp"
+#include "models/config/project.hpp"
+#include "models/config/version.hpp"
 #include "parse/config/token.hpp"
 #include <format>
 #include <utilite/utilite.hpp>
@@ -69,12 +72,66 @@ namespace Parse::Config {
     }
 
     auto Parser::advance() -> const Token& {
-        return tokens[current++];
+        return  tokens[current++];
+    }
+
+    auto Parser::next() -> const Token& {
+        return tokens[current+1];
     }
 
     auto Parser::parse_forge() -> void {
+        DEBUG() << "Start parse forge section";
+        while (!is_at_end()) {
+            if(peek().type==SECTION) break;
+
+            auto& token = advance();
+            if(advance().type!=EQUAL) {
+                error(std::format("[ERROR] Missed \'=\' after indentifier at line {}", next().line));
+                continue;
+            }
+
+            auto& value = advance();
+            if(token.literal=="min_version"){
+                DEBUG() << "Parsing min_version";
+                config.forge.min_version = Models::Version(value.literal);
+            } else {
+                error(std::format("[ERROR] Unknown parameter {} at the line {}", token.literal, token.line));
+            }
+        }
+        DEBUG() << "Finish parse forge section";
     }
 
     auto Parser::parse_project() -> void {
+        DEBUG() << "Start parse project section";
+        while (!is_at_end()) {
+            if(peek().type==SECTION) break;
+
+            auto& token = advance();
+            if(advance().type!=EQUAL) {
+                error(std::format("[ERROR] Missed \'=\' after indentifier at line {}", next().line));
+                continue;
+            }
+
+            auto& value = advance();
+            if(token.literal=="name"){
+                DEBUG() << "Parsing name";
+                config.project.name = value.literal;
+            } else if(token.literal=="version") {
+                DEBUG() << "Parsing version";
+                config.project.version = Models::Version(value.literal);
+            } else if(token.literal=="source_dir") {
+                DEBUG() << "Parsing source_dir";
+                config.project.source_dir = value.literal;
+            }  else if(token.literal=="build_dir"){
+                DEBUG() << "Parsing build_dir";
+                config.project.build_dir = value.literal;
+            } else if(token.literal=="standard"){
+                DEBUG() << "Parsing standard";
+                config.project.standard = value.literal;
+            } else {
+                error(std::format("[ERROR] Unknown parameter {} at the line {}", token.literal, token.line));
+            }
+        }
+        DEBUG() << "Finish parse project section";
     }
 }

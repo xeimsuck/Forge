@@ -26,6 +26,7 @@ namespace Parse::Config {
         auto is_at_end() -> bool;
         auto peek() -> const Token&;
         auto advance() -> const Token&;
+        auto next() -> const Token&;
 
         auto parse_forge() -> void;
         auto parse_project() -> void;

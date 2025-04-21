@@ -7,7 +7,12 @@ public:
     Logger(const char* color);
     ~Logger();
     Logger& operator<<(const std::string_view& view);
+    Logger& operator<<(const char* str);
+    Logger& operator<<(bool b);
     Logger& operator<<(char ch);
+    Logger& operator<<(unsigned char ch);
+    Logger& operator<<(int num);
+    Logger& operator<<(unsigned int num);
     Logger& operator<<(long num);
     Logger& operator<<(unsigned long num);
     Logger& operator<<(long long num);

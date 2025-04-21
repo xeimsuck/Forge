@@ -23,8 +23,33 @@ Logger& Logger::operator<<(const std::string_view& view){
     return *this;
 }
 
+Logger& Logger::operator<<(const char* str){
+    std::cout << str;
+    return *this;
+}
+
+Logger& Logger::operator<<(const bool b){
+    std::cout << (b ? "true" : "false");
+    return *this;
+}
+
 Logger& Logger::operator<<(const char ch){
     std::cout << ch;
+    return *this;
+}
+
+Logger& Logger::operator<<(const unsigned char ch){
+    std::cout << ch;
+    return *this;
+}
+
+Logger& Logger::operator<<(const int num){
+    std::cout << num;
+    return *this;
+}
+
+Logger& Logger::operator<<(const unsigned int num){
+    std::cout << num;
     return *this;
 }
 
