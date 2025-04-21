@@ -9,20 +9,25 @@ namespace Models {
     Version::Version(const std::string& str){
         int current = 0;
 
-        auto parse = [&current, &str](uint8_t n){
+        auto parse = [&current, &str](uint8_t& n) -> bool {
             if(current<=str.size() && !isdigit(str[current])) {
-                ERROR() << "[ERROR] Incorrect version";
-                return;
+                return false;
             }
 
             while(current<=str.size() && isdigit(str[current])){
-                n=n*10+(str[current]-'0');
-                ++current;
+                n=n*10+(str[current++]-'0');
             }
+            ++current;
+
+            return true;
         };
 
-        parse(this->major);
-        parse(this->minor);
-        parse(this->patch);
+        if(!parse(this->major)){
+            ERROR() << "[ERROR] Incorrect major version";
+        } else if(!parse(this->minor)){
+            ERROR() << "[ERROR] Incorrect minor version";
+        } else if(!parse(this->patch)){
+            ERROR() << "[ERROR] Incorrect patch version";
+        }
     }
 }
