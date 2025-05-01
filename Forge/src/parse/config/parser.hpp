@@ -1,3 +1,5 @@
+#pragma once
+
 #include <vector>
 #include <models/config/config.hpp>
 #include <logger/logger.hpp>
